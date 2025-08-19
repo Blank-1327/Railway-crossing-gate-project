@@ -12,6 +12,14 @@ This step includes test cases for different input combinations and suggestions f
 
 ✅ All actual results match the expected outputs.
 
+<img width="649" height="352" alt="image" src="https://github.com/user-attachments/assets/764fd0c5-2065-4c0f-8526-455028a5ddd8" />
+
+this test shows that the gate will only open if the train is not detected within 50m and a vehicle is not passing. And also, the gate will not be open if the train is passing.
+
+
+
+
+
 ---
 
 ## 🔧 Suggested Improvements
