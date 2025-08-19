@@ -17,7 +17,7 @@ def raise_gate():
     print("🔺 Raising gate...")
 
 def wait_for_vehicle_to_clear():
-    print("⏳ Waiting for vehicle to clear...")
+    print("⏳ Vehicle detected. Waiting for it to clear...")
     input("Press Enter when vehicle has cleared...")
     print("✅ Crossing is clear.")
 
@@ -36,31 +36,58 @@ def crossing_control(train_distance, vehicle_on_crossing):
         
         # Simulate train passing
         print("🚂 Train is passing...")
-        time.sleep(3)
-        
-        # Simulate track clearance
-        print("✅ Train has passed. Checking track...")
-        time.sleep(2)
-        raise_gate()
+        input("Press Enter when train has passed...")
+
+        # Confirm both train and vehicle are gone before raising gate
+        while True:
+            train_input = input("🚂 Is the train still detected? Enter '1' for Yes, '0' for No: ").strip()
+            vehicle_input = input("🚗 Is a vehicle still on the crossing? Enter '1' for Yes, '0' for No: ").strip()
+
+            if train_input == "close" or vehicle_input == "close":
+                print("👋 Program closed. Stay safe!")
+                exit()
+
+            train_clear = train_input == "0"
+            vehicle_clear = vehicle_input == "0"
+
+            if train_clear and vehicle_clear:
+                raise_gate()
+                break
+            else:
+                print("⛔ Gate remains down. Waiting for both train and crossing to be clear...")
+                time.sleep(2)
     else:
-        print("✅ No train nearby. Gate remains open.")
+        if not detect_vehicle(vehicle_on_crossing):
+            print("✅ No train or vehicle detected. Gate remains open.")
+        else:
+            print("⛔ Vehicle detected but no train. Gate stays down for safety.")
+            wait_for_vehicle_to_clear()
+            print("✅ Crossing is now clear. Gate remains open.")
 
 # Continuous loop
 print("=== Railway Crossing Control System ===")
 while True:
-    command = input("\nType 'run' to simulate, or 'closed' to exit: ").strip().lower()
+    command = input("\nType 'run' to simulate, or 'close' to exit: ").strip().lower()
     
-    if command == "closed":
+    if command == "close":
         print("👋 Program closed. Stay safe!")
         break
     
     if command == "run":
         try:
             train_distance = int(input("Enter train distance in meters: "))
+            if str(train_distance).lower() == "close":
+                print("👋 Program closed. Stay safe!")
+                break
+
             vehicle_input = input("Is a vehicle on the crossing? Enter '1' for Yes, '0' for No: ").strip()
+            if vehicle_input.lower() == "close":
+                print("👋 Program closed. Stay safe!")
+                break
+
             vehicle_on_crossing = vehicle_input == "1"
             crossing_control(train_distance, vehicle_on_crossing)
         except ValueError:
             print("⚠️ Invalid input. Please enter numeric values for distance.")
     else:
-        print("⚠️ Unknown command. Please type 'run' or 'closed'.")
+        print("⚠️ Unknown command. Please type 'run' or 'close'.")
