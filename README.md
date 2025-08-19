@@ -28,7 +28,7 @@ The project follows 7 structured steps:
 
 ---
 
-## 📂 Folder Structure
+##  Folder Structure
 
 Each folder contains one step of the engineering method. Files include:
 - Text/Markdown explanations
@@ -38,7 +38,7 @@ Each folder contains one step of the engineering method. Files include:
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 - **Name:** Mark Louie Soriano  
 - **Student ID:** u3302870  
