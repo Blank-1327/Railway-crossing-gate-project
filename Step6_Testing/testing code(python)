@@ -1,0 +1,66 @@
+import time
+
+# Thresholds
+TRAIN_DETECTION_RANGE = 50  # meters
+COUNTDOWN_TIME = 5  # seconds
+
+def detect_train(distance):
+    return distance <= TRAIN_DETECTION_RANGE
+
+def detect_vehicle(vehicle_present):
+    return vehicle_present
+
+def lower_gate():
+    print("🔻 Lowering gate...")
+
+def raise_gate():
+    print("🔺 Raising gate...")
+
+def wait_for_vehicle_to_clear():
+    print("⏳ Waiting for vehicle to clear...")
+    input("Press Enter when vehicle has cleared...")
+    print("✅ Crossing is clear.")
+
+def crossing_control(train_distance, vehicle_on_crossing):
+    print(f"\n🚂 Train detected at {train_distance} meters.")
+    
+    if detect_train(train_distance):
+        print(f"⏱ Countdown started: {COUNTDOWN_TIME} seconds")
+        for i in range(COUNTDOWN_TIME):
+            print(f"  {COUNTDOWN_TIME - i}...")
+            time.sleep(1)
+            if detect_vehicle(vehicle_on_crossing):
+                wait_for_vehicle_to_clear()
+                break
+        lower_gate()
+        
+        # Simulate train passing
+        print("🚂 Train is passing...")
+        time.sleep(3)
+        
+        # Simulate track clearance
+        print("✅ Train has passed. Checking track...")
+        time.sleep(2)
+        raise_gate()
+    else:
+        print("✅ No train nearby. Gate remains open.")
+
+# Continuous loop
+print("=== Railway Crossing Control System ===")
+while True:
+    command = input("\nType 'run' to simulate, or 'closed' to exit: ").strip().lower()
+    
+    if command == "closed":
+        print("👋 Program closed. Stay safe!")
+        break
+    
+    if command == "run":
+        try:
+            train_distance = int(input("Enter train distance in meters: "))
+            vehicle_input = input("Is a vehicle on the crossing? Enter '1' for Yes, '0' for No: ").strip()
+            vehicle_on_crossing = vehicle_input == "1"
+            crossing_control(train_distance, vehicle_on_crossing)
+        except ValueError:
+            print("⚠️ Invalid input. Please enter numeric values for distance.")
+    else:
+        print("⚠️ Unknown command. Please type 'run' or 'closed'.")
