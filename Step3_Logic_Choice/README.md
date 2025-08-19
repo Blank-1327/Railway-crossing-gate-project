@@ -21,3 +21,23 @@ After comparing both options, I chose **Solution 2** because it is safer and mor
 
  Final Decision:  
 Solution 2 is the better option because it makes the system safer while remaining practical and easy to apply.
+
+---
+
+Solution 2: Sensor-Based Priority System 
+
+Use separate sensors for detecting: 
+
+Train approach (distance-based) 
+
+Vehicle entry and exit at the crossing (pressure or motion sensors) 
+
+Logic: 
+
+If a train is detected within a certain range, start a countdown to lower the gate. 
+
+If a vehicle is still detected during countdown, hold the gate until it leaves. 
+
+Once both train has passed and track is clear, raise the gate. 
+
+Adds safety delay and improves reliability in busy areas. 
