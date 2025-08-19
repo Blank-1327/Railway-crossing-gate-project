@@ -9,10 +9,7 @@ The flowchart follows the logic described in Step 4. It includes:
 
 ---
 
-##  Instructions:
 
-Upload the flowchart image file (PNG) into this folder.  
-Recommended filename:  
 <img width="686" height="983" alt="railway_gate_flowchart_with_delay" src="https://github.com/user-attachments/assets/ef141fa7-cd09-4bcd-a96f-2ce066f2a75c" />
 
 
